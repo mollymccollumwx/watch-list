@@ -40,8 +40,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/movies/new", (req, res) => {
-//   res.send("A form to create a new movie will go here.");
-    res.render("new-movie");
+  //   res.send("A form to create a new movie will go here.");
+  res.render("new-movie");
 });
 
 app.get("/movies/:id", (req, res) => {
@@ -65,8 +65,15 @@ app.get("/movies/:id/edit", (req, res) => {
 // API ROUTES
 
 app.post("/api/movies", (req, res) => {
-  res.send(
-    "After creating a new movie in the database, I will return a response."
+  //   res.send(
+  //     "After creating a new movie in the database, I will return a response."
+  //   );
+  connection.query(
+    "INSERT INTO movies (movie) VALUES (?)",
+    [req.body.movie],
+    (err, result) => {
+        res.json(result);
+    }
   );
 });
 
