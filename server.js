@@ -40,7 +40,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/movies/new", (req, res) => {
-  res.send("A form to create a new movie will go here.");
+//   res.send("A form to create a new movie will go here.");
+    res.render("new-movie");
 });
 
 app.get("/movies/:id", (req, res) => {
