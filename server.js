@@ -48,7 +48,8 @@ app.get("/movies/:id", (req, res) => {
     const movieId = req.params.id;
 
     connection.query("SELECT * FROM movies WHERE id = ?", [movieId], (err, data) => {
-        console.log(data);
+        // console.log(data);
+        res.render("single-movie", data[0]);
     })
 });
 
