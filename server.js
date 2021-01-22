@@ -59,7 +59,15 @@ app.get("/movies/:id", (req, res) => {
 });
 
 app.get("/movies/:id/edit", (req, res) => {
-  res.send("A form to update the movie will go here.");
+  const movieId = req.params.id;
+  //   res.send("A form to update the movie will go here.");
+  connection.query(
+    "SELECT * FROM movies WHERE id = ?",
+    [movieId],
+    (err, data) => {
+      res.render("edit-movie", data[0]);
+    }
+  );
 });
 
 // API ROUTES
@@ -72,7 +80,7 @@ app.post("/api/movies", (req, res) => {
     "INSERT INTO movies (movie) VALUES (?)",
     [req.body.movie],
     (err, result) => {
-        res.json(result);
+      res.json(result);
     }
   );
 });

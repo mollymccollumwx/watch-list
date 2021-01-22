@@ -22,7 +22,8 @@
             const movieTitle = $("#movie-title").val();
 
             $.ajax("/api/movies", {
-                type: "POST", data: {
+                type: "POST",
+                data: {
                     movie: movieTitle
                 }
             }).then(response => {

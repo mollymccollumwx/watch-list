@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <form id="update-movie-form">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="movie-title" placeholder="Enter your movie title!"
+                        value="{{movie}}">
+                </div>
+                <input type="hidden" id="movie-id" value="{{id}}" />
+                <button type="submit" class="btn btn-primary">Update Movie</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#update-movie-form").on("submit", function (e) {
+            e.preventDefault();
+
+            const movieTitle = $("#movie-title").val();
+            const movieId = $("#movie-id").val();
+
+            $.ajax(`/api/movies/${movieId}`, {
+                type: "PUT",
+                data: {
+                    movie: movieTitle
+                }
+            }).then(response => {
+                alert("Movie successfully updated!");
+                window.location.href = "/";
+            })
+        })
+    })
+</script>
