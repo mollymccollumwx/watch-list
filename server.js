@@ -31,7 +31,16 @@ connection.connect(function (err) {
 
 // VIEWS ROUTES
 app.get("/", (req, res) => {
-  res.send("All my movies will go here.");
+  //   res.send("All my movies will go here.");
+  connection.query("SELECT * FROM movies", (err, data) => {
+    if (err) throw err;
+    console.log(data);
+    res.render("index", { movies: data });
+  });
+});
+
+app.get("/movies/new", (req, res) => {
+  res.send("A form to create a new movie will go here.");
 });
 
 app.get("/movies/:id", (req, res) => {
@@ -42,11 +51,21 @@ app.get("/movies/:id/edit", (req, res) => {
   res.send("A form to update the movie will go here.");
 });
 
-app.get("/movies/new", (req, res) => {
-  res.send("A form to create a new movie will go here.");
+// API ROUTES
+
+app.post("/api/movies", (req, res) => {
+  res.send(
+    "After creating a new movie in the database, I will return a response."
+  );
 });
 
-// API ROUTES
+app.put("/api/movies/:id", (req, res) => {
+  res.send("After updating a movie by ID, I will return a response");
+});
+
+app.delete("/api/movies/:id", (req, res) => {
+  res.send("After deleting amovie by ID, I will return a response.");
+});
 
 // LISTEN ON THE PORT
 app.listen(PORT, () => {
