@@ -86,7 +86,14 @@ app.post("/api/movies", (req, res) => {
 });
 
 app.put("/api/movies/:id", (req, res) => {
-  res.send("After updating a movie by ID, I will return a response");
+  //   res.send("After updating a movie by ID, I will return a response");
+  connection.query(
+    "UPDATE movies SET movie = ? WHERE id = ?",
+    [req.body.movie, req.params.id],
+    (err, result) => {
+      res.json(result);
+    }
+  );
 });
 
 app.delete("/api/movies/:id", (req, res) => {
