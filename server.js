@@ -44,13 +44,17 @@ app.get("/movies/new", (req, res) => {
 });
 
 app.get("/movies/:id", (req, res) => {
-//   res.send("A single movie will go here.");
-    const movieId = req.params.id;
+  //   res.send("A single movie will go here.");
+  const movieId = req.params.id;
 
-    connection.query("SELECT * FROM movies WHERE id = ?", [movieId], (err, data) => {
-        // console.log(data);
-        res.render("single-movie", data[0]);
-    })
+  connection.query(
+    "SELECT * FROM movies WHERE id = ?",
+    [movieId],
+    (err, data) => {
+      // console.log(data);
+      res.render("single-movie", data[0]);
+    }
+  );
 });
 
 app.get("/movies/:id/edit", (req, res) => {
@@ -70,7 +74,15 @@ app.put("/api/movies/:id", (req, res) => {
 });
 
 app.delete("/api/movies/:id", (req, res) => {
-  res.send("After deleting amovie by ID, I will return a response.");
+  const movieId = req.params.id;
+  //   res.send("After deleting amovie by ID, I will return a response.");
+  connection.query(
+    "DELETE FROM movies WHERE id = ?",
+    [movieId],
+    (err, result) => {
+      res.json(result);
+    }
+  );
 });
 
 // LISTEN ON THE PORT
