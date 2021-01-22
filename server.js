@@ -44,7 +44,12 @@ app.get("/movies/new", (req, res) => {
 });
 
 app.get("/movies/:id", (req, res) => {
-  res.send("A single movie will go here.");
+//   res.send("A single movie will go here.");
+    const movieId = req.params.id;
+
+    connection.query("SELECT * FROM movies WHERE id = ?", [movieId], (err, data) => {
+        console.log(data);
+    })
 });
 
 app.get("/movies/:id/edit", (req, res) => {
