@@ -98,7 +98,7 @@ app.put("/api/movies/:id", (req, res) => {
 
 app.delete("/api/movies/:id", (req, res) => {
   const movieId = req.params.id;
-  //   res.send("After deleting amovie by ID, I will return a response.");
+  //   res.send("After deleting a movie by ID, I will return a response.");
   connection.query(
     "DELETE FROM movies WHERE id = ?",
     [movieId],
